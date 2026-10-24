@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PAPAYA GP">
+<title>PAPAYA GP</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+<div class="vig"></div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div class="row top">
+    <div class="pos"><b id="hPos">P8</b><span id="hTot">/8</span></div>
+    <div class="lapbox"><div id="hLap">КОЛО 1/3</div><div id="hTime">0:00.00</div></div>
+    <button id="btnPause" class="icon" aria-label="Пауза"><i></i><i></i></button>
+  </div>
+  <div class="row bottom">
+    <div class="spd"><b id="hSpd">0</b><span>KM/H</span><div class="bar"><u id="hBar"></u></div></div>
+    <button id="btnBrake" class="brake">BRAKE</button>
+    <div class="best"><span>НАЙКР. КОЛО</span><b id="hBest">--</b></div>
+  </div>
+</div>
+
+<!-- Відлік -->
+<div id="countdown" class="hidden"><span id="cdText"></span></div>
+
+<!-- 1. Стартовий екран -->
+<section id="scr-start" class="screen">
+  <div class="logo"><span class="l1">PAPAYA</span><span class="l2">GP</span></div>
+  <p class="tag">Мобільна гоночна гра</p>
+  <button id="btnStart" class="btn">СТАРТ</button>
+  <ul class="hints">
+    <li>Тримайте ліву або праву частину екрана — поворот</li>
+    <li>Свайп вліво / вправо — плавне кермо</li>
+    <li>BRAKE — гальмо &nbsp;·&nbsp; ПК: стрілки та пробіл</li>
+  </ul>
+</section>
+
+<!-- 2. Вибір режиму -->
+<section id="scr-mode" class="screen hidden">
+  <h2>ОБЕРИ РЕЖИМ</h2>
+  <button class="mode" data-mode="0"><b>ЕКСПРЕС</b><span>2 кола · помірні суперники</span></button>
+  <button class="mode" data-mode="1"><b>ГРАН-ПРІ</b><span>3 кола · швидкі суперники</span></button>
+  <button class="mode" data-mode="2"><b>ЛЕГЕНДА</b><span>5 кіл · безжальні суперники</span></button>
+  <button id="btnBack" class="btn ghost">НАЗАД</button>
+</section>
+
+<!-- Пауза -->
+<section id="scr-pause" class="screen hidden">
+  <div class="panel">
+    <h2>ПАУЗА</h2>
+    <button id="btnContinue" class="btn">ПРОДОВЖИТИ</button>
+    <button id="btnRestartP" class="btn ghost">ПОЧАТИ ЗНОВУ</button>
+    <button id="btnMenuP" class="btn ghost">МЕНЮ</button>
+  </div>
+</section>
+
+<!-- 5. Фініш -->
+<section id="scr-finish" class="screen hidden">
+  <div class="panel">
+    <h2 id="fTitle">ФІНІШ</h2>
+    <div class="bigpos" id="fPos">P1</div>
+    <div class="stats">
+      <div><span>ЧАС ГОНКИ</span><b id="fTime">0:00.00</b></div>
+      <div><span>НАЙКР. КОЛО</span><b id="fBest">0:00.00</b></div>
+    </div>
+    <div class="rec" id="fRec"></div>
+    <button id="btnAgain" class="btn">ГРАТИ ЩЕ</button>
+    <button id="btnModes" class="btn ghost">ІНШИЙ РЕЖИМ</button>
+    <button id="btnMenuF" class="btn ghost">МЕНЮ</button>
+  </div>
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>

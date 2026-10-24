@@ -1,0 +1,96 @@
+:root{--pap:#ff8000;--blk:#0a0a0c;--gr:#1c1d22;--gr2:#2a2b31;--wh:#f5f5f5;
+  --f:"Avenir Next Condensed","Futura","Arial Narrow","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--blk);color:var(--wh);
+  font-family:var(--f);touch-action:none;overscroll-behavior:none}
+body{position:fixed;inset:0;width:100%}
+#game{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.vig{position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 55%,transparent 55%,rgba(0,0,0,.55))}
+.hidden{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+
+/* ---------- Екрани ---------- */
+.screen{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:16px;text-align:center;touch-action:manipulation;
+  padding:max(24px,env(safe-area-inset-top)) 22px max(24px,env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(8,8,10,.82),rgba(8,8,10,.3) 45%,rgba(8,8,10,.9));
+  transition:opacity .35s,visibility .35s}
+.logo{display:flex;align-items:stretch;font-style:italic;font-weight:900;line-height:1;transform:skewX(-8deg)}
+.l1,.l2{font-size:clamp(46px,16vw,92px)}
+.l1{color:var(--pap);letter-spacing:2px;text-shadow:0 4px 0 #000}
+.l2{background:var(--wh);color:var(--blk);padding:0 12px;margin-left:8px}
+.tag{margin:0 0 18px;letter-spacing:.35em;font-size:12px;color:#c9c9cf;text-transform:uppercase}
+h2{margin:0 0 8px;font-size:30px;font-style:italic;font-weight:900;letter-spacing:.14em}
+.hints{list-style:none;margin:14px 0 0;padding:0;color:#a9a9b2;font-size:14px;line-height:1.7;max-width:340px}
+
+.btn{width:min(86vw,340px);min-height:60px;border:0;cursor:pointer;color:#111;background:var(--pap);
+  font:900 italic 21px var(--f);letter-spacing:.14em;
+  clip-path:polygon(16px 0,100% 0,calc(100% - 16px) 100%,0 100%);
+  transition:transform .12s,filter .12s;touch-action:manipulation}
+.btn:active{transform:scale(.95);filter:brightness(.9)}
+.btn.ghost{background:var(--gr2);color:var(--wh)}
+
+.mode{width:min(88vw,360px);min-height:84px;padding:14px 20px;text-align:left;cursor:pointer;
+  background:linear-gradient(90deg,var(--gr),#141519);color:var(--wh);
+  border:0;border-left:6px solid var(--pap);display:flex;flex-direction:column;gap:4px;
+  transition:transform .12s,background .2s;touch-action:manipulation}
+.mode b{font:900 italic 24px var(--f);letter-spacing:.12em}
+.mode span{font-size:13px;color:#a9a9b2}
+.mode:active{transform:scale(.97);background:#2a1c10}
+
+.panel{width:min(90vw,360px);display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding:26px 20px;background:rgba(18,18,22,.93);border-top:5px solid var(--pap);
+  animation:rise .4s ease both}
+.panel .btn{width:100%}
+.bigpos{font:900 italic 88px/1 var(--f);color:var(--pap);text-shadow:0 4px 0 #000}
+.stats{display:flex;gap:22px;width:100%;justify-content:center}
+.stats div{display:flex;flex-direction:column;gap:4px}
+.stats span{font-size:11px;letter-spacing:.2em;color:#a9a9b2}
+.stats b{font:800 22px var(--f);font-variant-numeric:tabular-nums}
+.rec{min-height:18px;color:var(--pap);font-weight:800;letter-spacing:.18em;font-size:13px}
+@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- HUD ---------- */
+#hud{position:fixed;inset:0;z-index:5;pointer-events:none;display:flex;flex-direction:column;
+  justify-content:space-between;transition:opacity .3s,visibility .3s;
+  padding:max(12px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right))
+          max(16px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+.row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.row.bottom{align-items:flex-end}
+.pos{display:flex;align-items:baseline;gap:2px;min-width:92px}
+.pos b{font:900 italic 52px/1 var(--f);color:var(--pap);text-shadow:0 3px 0 #000}
+.pos span{font:800 italic 20px var(--f);color:#ddd}
+.lapbox{text-align:center;font:800 14px var(--f);letter-spacing:.18em;
+  background:rgba(10,10,12,.62);padding:7px 14px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+#hTime{font-size:24px;letter-spacing:.04em;font-variant-numeric:tabular-nums;color:var(--wh)}
+.icon{pointer-events:auto;width:56px;height:56px;border:0;background:rgba(10,10,12,.7);
+  display:flex;gap:7px;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.icon i{display:block;width:6px;height:22px;background:var(--wh)}
+.icon:active{background:var(--pap)}
+.spd{min-width:96px;display:flex;flex-direction:column}
+.spd b{font:900 italic 44px/1 var(--f);text-shadow:0 3px 0 #000;font-variant-numeric:tabular-nums}
+.spd span{font:800 11px var(--f);letter-spacing:.25em;color:var(--pap)}
+.bar{margin-top:6px;height:5px;background:rgba(255,255,255,.18);overflow:hidden}
+.bar u{display:block;height:100%;background:var(--pap);transform-origin:left;transform:scaleX(0)}
+.brake{pointer-events:auto;width:104px;height:62px;border:0;cursor:pointer;touch-action:none;
+  font:900 italic 16px var(--f);letter-spacing:.14em;color:var(--wh);background:rgba(180,20,20,.82);
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.brake:active{background:#ff2b2b}
+.best{min-width:96px;text-align:right;display:flex;flex-direction:column;gap:2px}
+.best span{font:800 10px var(--f);letter-spacing:.2em;color:#b5b5bd}
+.best b{font:800 20px var(--f);font-variant-numeric:tabular-nums}
+
+/* ---------- Відлік ---------- */
+#countdown{position:fixed;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;transition:opacity .25s,visibility .25s}
+#cdText{font:900 italic clamp(110px,38vw,240px)/1 var(--f);color:var(--pap);
+  text-shadow:0 8px 0 #000,0 0 40px rgba(255,128,0,.5)}
+#cdText.pop{animation:pop .8s ease-out both}
+@keyframes pop{0%{transform:scale(1.9);opacity:0}25%{opacity:1}100%{transform:scale(1);opacity:.92}}
+
+@media (max-height:520px){
+  .screen{gap:8px}.logo{transform:scale(.7) skewX(-8deg)}.hints{display:none}
+  .mode{min-height:60px;padding:8px 18px}.panel{padding:14px;gap:8px}.bigpos{font-size:52px}
+  .btn{min-height:46px;font-size:17px}
+}
